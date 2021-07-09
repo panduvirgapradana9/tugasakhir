@@ -33,11 +33,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="text" name="email" id="email" class="form-control" value={{ old('email') }}>
+                                    <input type="email" name="email" id="email" class="form-control" value={{ old('email') }}>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">No tlp</label>
-                                    <input type="text" name="phone" id="phone" class="form-control" value={{ old('phone') }}>
+                                    <input type="number" name="phone" id="phone" class="form-control" value={{ old('phone') }}>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
