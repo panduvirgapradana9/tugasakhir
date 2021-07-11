@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
 <div class="container-fluid">
+@if (Auth::check() && Auth::user()->role == "admin")
     <div class="row">
         <div class="col-6 col-lg-3">
             <div class="small-box bg-primary">
@@ -84,6 +85,7 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
         <div>
             <canvas id="charttransaksi" style="height:350px;" height="200"></canvas>
@@ -99,6 +101,7 @@
             <canvas id="chartsupplier" style="height:350px;" height="200"></canvas>
         </div>
     </div>
+    @endif
 </div>
 @php
 $transaksi = DB::select("select b.total, a.name from  users a, cart b where a.id=b.user_id order by total DESC limit 10");
