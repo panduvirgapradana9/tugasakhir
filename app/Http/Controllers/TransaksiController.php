@@ -8,6 +8,7 @@ use App\AlamatPengiriman;
 use App\Order;
 use App\CartDetail;
 use App\Produk;
+use DB;
 
 class TransaksiController extends Controller
 {
@@ -59,6 +60,7 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
+
         $itemuser = $request->user();
         $itemcart = Cart::where('status_cart', 'cart')
                         ->where('user_id', $itemuser->id)
@@ -148,6 +150,27 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        if(\Auth::user()->role == 'member'){     
+            request()->validate([
+                'bukti' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           ]);
+           if ($files = $request->file('bukti')) {
+           // Define upload path
+               $destinationPath = public_path('/images/buktitransfer'); // upload path
+            // Upload Orginal Image           
+               $Image = date('YmdHis') . "." . $files->getClientOriginalExtension();
+               $files->move($destinationPath, $Image);
+               $insert['image'] = "$Image";
+            // Save In Database
+            DB::table('cart')->where('id', $request->id)->update([
+                'status_pembayaran' => 'sudah',
+                'bukti_transfer' => $Image
+                ]);
+            }
+            return redirect('admin/transaksi')->with('success', 'Bukti Transfer berhasil diunggah');
+        }
+
         $this->validate($request,[
             'status_pembayaran' => 'required',
             'status_pengiriman' => 'required',
@@ -217,5 +240,26 @@ class TransaksiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function bukti(Request $request, $id)
+    {
+        request()->validate([
+            'bukti' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+       ]);
+       if ($files = $request->file('bukti')) {
+       // Define upload path
+           $destinationPath = public_path('/public/image/buktitransfer'); // upload path
+        // Upload Orginal Image           
+           $Image = date('YmdHis') . "." . $files->getClientOriginalExtension();
+           $files->move($destinationPath, $Image);
+           $insert['image'] = "$Image";
+        // Save In Database
+        DB::table('cart')->where('id', $request->id)->update([
+            'status_pembayaran' => 'sudah',
+            'bukti_transfer' => $Image
+            ]);
+        }
+        return redirect('admin/transaksi')->with('success', 'Image Upload successfully');
     }
 }

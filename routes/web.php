@@ -74,6 +74,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('produkimage', 'ProdukController@uploadimage');
     // hapus image produk
     Route::delete('produkimage/{id}', 'ProdukController@deleteimage');
+    //up bukti trasnfer
+    Route::post('admin/traansaksi/bukti', 'TransaksiController@bukti');
     // slideshow
     Route::resource('slideshow', 'SlideshowController');
     // produk promo

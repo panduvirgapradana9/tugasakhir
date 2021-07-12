@@ -65,10 +65,10 @@
                   <td>
                     @if ( $order->cart->status_pembayaran =='belum')
                       <span class="badge bg-secondary">{{ $order->cart->status_pembayaran }}</span>
-                      <a href="/buktitranfer">upload bukti tranfer</a><br>
+                      <a href="#" data-toggle="modal" data-target="#modal-upload{{$order->cart->id}}">upload bukti tranfer</a><br>
                     @else
                       <span class="badge badge-success">{{ $order->cart->status_pembayaran }}</span>
-                      <a href="/buktitranfer">upload bukti tranfer</a><br>
+                      <a href="#" data-toggle="modal" data-target="#modal-bukti{{$order->cart->id}}">Lihat Bukti Transfer</a><br>
                     @endif
 
                     @if ($order->cart->status_pengiriman=="dibatalkan")
@@ -108,6 +108,64 @@
         </div>
       </div>
     </div>
+
+//modal
+@foreach($itemorder as $order)
+<div class="modal fade" id="modal-upload{{$order->cart->id}}" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Upload Bukti Transfer</h4>
+            </div>
+            <div class="modal-body">
+              <form action="{{route('transaksi.update', $order->id) }}" method="post" enctype="multipart/form-data">
+              @csrf
+              {{ method_field('patch') }}
+
+                <div class="card-body">
+                  <input class="form-control" type="hidden" name="id" id="id" value="{{ $order->cart->id}}">
+                   <div class="row">
+                    <div class="col-md-12 pr-1">
+                      <div class="form-group">
+                        <label>Upload Gambar</label>
+                        <input type="file" class="form-control"  placeholder="" name="bukti" required="true" value="">
+                      </div>
+                    </div>
+                </div>
+                 </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="modal-footer justify-content-between">
+             <button type="submit" class="btn btn-primary" style="float: right;">Simpan</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+          
+            </div>
+              </form>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+              @endforeach
+@foreach($itemorder as $order)
+<div class="modal fade" id="modal-bukti{{$order->cart->id}}" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Upload Bukti Transfer</h4>
+            </div>
+            <div class="modal-body">
+            <img src="{{ asset('images/buktitransfer/'.$order->cart->bukti_transfer) }}" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+              
+              
+                @endforeach
+         
+        <!-- End Modal -->
+
   </div>
 </div>
 @endsection

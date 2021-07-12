@@ -57,4 +57,6 @@ class ImageController extends Controller
         $inputangambar['user_id'] = $itemuser->id;
         return Image::create($inputangambar);
     }
+    
+
 }
