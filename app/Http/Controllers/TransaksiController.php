@@ -8,6 +8,7 @@ use App\AlamatPengiriman;
 use App\Order;
 use App\CartDetail;
 use App\Produk;
+use App\User;
 use DB;
 
 class TransaksiController extends Controller

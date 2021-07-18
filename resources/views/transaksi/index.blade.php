@@ -32,6 +32,9 @@
                 <tr>
                   <th>No</th>
                   <th>Invoice</th>
+                  @if($itemuser->role == 'admin')
+                  <th>Nama</th>
+                  @endif
                   <th>Sub Total</th>
                   <th>Diskon</th>
                   <th>Ongkir</th>
@@ -50,6 +53,11 @@
                   <td>
                     {{ $order->cart->no_invoice }}
                   </td>
+                  @if($itemuser->role == 'admin')
+                  <td>
+                  {{$order->nama_penerima}}
+                  </td>  
+                  @endif
                   <td>
                     {{ number_format($order->cart->subtotal, 2) }}
                   </td>
@@ -109,7 +117,7 @@
       </div>
     </div>
 
-//modal
+
 @foreach($itemorder as $order)
 <div class="modal fade" id="modal-bukti{{$order->cart->id}}" role="dialog">
         <div class="modal-dialog">
