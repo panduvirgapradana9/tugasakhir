@@ -95,7 +95,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     // route profil
     Route::resource('profil', 'UserController');
     
-  
+    Route::get('penyetokan', 'ProdukController@penyetokan')->name('produk.penyetokan');
+    
   
 });
 

@@ -15,7 +15,7 @@ class Pengadaan extends Model
         'akhir',
         'harga_beli',
         'created_at',
-        'kadalauarsa'
+        'kadaluarsa'
     ];
 
     public function produk() {

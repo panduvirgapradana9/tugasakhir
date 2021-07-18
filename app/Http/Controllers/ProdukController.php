@@ -9,6 +9,7 @@ use App\ProdukImage;
 use App\Produk;
 use App\Supplier;
 use App\Kategori;
+use App\Pengadaan;
 use Session;
 use DB;
 
@@ -291,5 +292,14 @@ class ProdukController extends Controller
         $data = array('title' => 'Produk Kadaluarsa',
                     'itemproduk' => $itemproduk);
         return view('produk.index', $data)->with('no', ($request->input('page', 1) - 1) * 20);
+    }
+    public function penyetokan(Request $request)
+    {
+        $item= DB::select("select * from pengadaan a, produk b where a.id_produk=b.id order by a.created_at DESC");
+        //$item = Pengadaan::orderBy('created_at', 'desc')->paginate(20);
+
+        $data = array('title' => 'Penyetokan',
+                    'item' => $item);
+        return view('produk.penyetokan', $data)->with('no', ($request->input('page', 1) - 1) * 20);
     }
 }
