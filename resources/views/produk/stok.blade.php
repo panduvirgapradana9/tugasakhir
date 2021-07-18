@@ -2,10 +2,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col col-md-8">
+        <div class="col col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Tambah Stok</h4>
+                    <h4 class="card-title">Tambah Pengadaan Produk</h4>
                 </div>
 
                 <div class="card-body">
@@ -15,6 +15,7 @@
                                 <th>Nama</th>
                                 <th>Qty</th>
                                 <th>Harga</th>
+                                <th>Kadaluarsa</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -29,17 +30,21 @@
                                     @csrf
                                     <td>
                                         <input type="number" name="qty" class="btn btn-outline-primary btn-sm"
-                                            value="{{ number_format($produk->qty, 0) }}">
+                                            >
                                         {{ $produk->satuan }}
                                     </td>
-                                    <td>
-                                        {{ number_format($produk->harga, 2) }}
+                                    <td><input type="number" name="harga" class="btn btn-outline-primary btn-sm"
+                                            >
+                                    </td>                             
+                                    <td><input type="date" name="kadaluarsa" class="btn btn-outline-primary btn-sm">
+                                    <br><p>Kosongi bila produk tidak memiliki kadaluarsa</p>
                                     </td>
+       
                                     <td>
 
                                         
-                                        <button type="submit" class="btn btn-sm btn-danger mb-2">
-                                            Update
+                                        <button type="submit" class="btn btn-sm btn-primary mb-2">
+                                            SIMPAN
                                         </button>
 
                                     </td>

@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       @if (Auth::check() && Auth::user()->role == "admin")
       
       <?php
-        $stok = \DB::select("SELECT * FROM produk WHERE qty < min_qty");
+        $stok = \DB::select("SELECT * FROM produk WHERE qty < min_qty OR exp_date between '2010-01-01' AND CURDATE()");
       ?>
 
         <li class="nav-item dropdown">

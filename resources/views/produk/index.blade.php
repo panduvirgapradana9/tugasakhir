@@ -12,10 +12,10 @@
               Baru
             </a>
             <a href="{{ route('produk.cekstok') }}" class="btn btn-sm btn-danger">
-              Cek Stok Obat
+              Cek Stok Produk
             </a>
             <a href="{{ route('produk.cekkadaluarsa') }}" class="btn btn-sm btn-danger">
-              Cek Kadaluarsa Obat
+              Cek Kadaluarsa Produk
             </a>
           </div>
         </div>

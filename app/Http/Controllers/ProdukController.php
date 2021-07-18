@@ -247,7 +247,7 @@ class ProdukController extends Controller
     public function stok($id) {
         $itemproduk = Produk::where('id', $id)->get();
         
-        $data = array('title' => 'Tambah Stok',
+        $data = array('title' => 'Pengadaan Produk',
                 'itemproduk' => $itemproduk);
 
         return view('produk.stok', $data);
@@ -256,10 +256,23 @@ class ProdukController extends Controller
     public function updatestok(Request $request, $id) {
         $itemproduk = \App\Produk::findOrFail($id);
         // kalo ga ada error page not found 404
-        $itemproduk->qty = $request->get('qty');
+        $nama=$request->get('nama_produk');
+        $new = new \App\Pengadaan;
+        $new->id_produk = $id;
+        $new->harga_beli = $request->get('harga');
+        $new->kadaluarsa = $request->get('kadaluarsa');
+        $new->masuk = $request->get('qty');
+        $new->awal = $itemproduk->qty;
+        $new->akhir = $itemproduk->qty + $request->get('qty');
+        $new->save();
+        
+        $x = ($request->get('harga')*$request->get('qty')+$itemproduk->qty*$itemproduk->harga)/($itemproduk->qty+$request->get('qty'));
+        $itemproduk->qty = $itemproduk->qty + $request->get('qty');
+        $itemproduk->harga = $x;
+        $itemproduk->exp_date = $request->get('kadaluarsa');
         $itemproduk->save();
 
-        return redirect()->route('produk.index')->with('success', 'Data berhasil diupdate');
+        return redirect()->route('produk.index')->with('success', 'Pengadaan produk telah ditambahkan');
     }
     public function cekstok(Request $request) {
         Session::put('produkrole','stok');
