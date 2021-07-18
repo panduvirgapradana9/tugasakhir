@@ -11,6 +11,12 @@
             <a href="{{ route('produk.create') }}" class="btn btn-sm btn-primary">
               Baru
             </a>
+            <a href="{{ route('produk.cekstok') }}" class="btn btn-sm btn-danger">
+              Cek Stok Obat
+            </a>
+            <a href="{{ route('produk.cekkadaluarsa') }}" class="btn btn-sm btn-danger">
+              Cek Kadaluarsa Obat
+            </a>
           </div>
         </div>
         <div class="card-body">
@@ -39,6 +45,7 @@
               </div>
           @endif
           <div class="table-responsive">
+          @if(Session::get('produkrole')=='index')
             <table class="table table-bordered">
               <thead>
                 <tr>
@@ -105,6 +112,89 @@
                 @endforeach
               </tbody>
             </table>
+            @elseif(Session::get('produkrole')=='stok')
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th width="50px">No</th>
+                  <th>Gambar</th>
+                  <th>Nama</th>
+                  <th>Sisa Stok</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($itemproduk as $produk)
+                <tr>
+                  <td>
+                  {{ ++$no }}
+                  </td>
+                  <td>
+                    @if($produk->foto != null)
+                    <img src="{{ asset('storage/'.$produk->foto) }}" alt="{{ $produk->nama_produk }}" width='150px' class="img-thumbnail">
+                    @endif
+                  </td>
+                  <td>
+                  <b>{{ $produk->nama_produk }}</b><br>
+                  </td>
+                  <td>
+                  {{ $produk->qty }} {{ $produk->satuan }}
+                  </td>
+                  <td>
+                  {{ $produk->status }}
+                  </td>
+                  <td>
+                    <a href="{{ route('produk.show', $produk->id) }}" class="btn btn-sm btn-primary mr-2 mb-2">
+                      Detail
+                    </a>
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+            @elseif(Session::get('produkrole')=='kadaluarsa')
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th width="50px">No</th>
+                  <th>Gambar</th>
+                  <th>Nama</th>
+                  <th>Kadaluarsa</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($itemproduk as $produk)
+                <tr>
+                  <td>
+                  {{ ++$no }}
+                  </td>
+                  <td>
+                    @if($produk->foto != null)
+                    <img src="{{ asset('storage/'.$produk->foto) }}" alt="{{ $produk->nama_produk }}" width='150px' class="img-thumbnail">
+                    @endif
+                  </td>
+                  <td>
+                  <b>{{ $produk->nama_produk }}</b><br>
+                  </td>
+                  <td>
+                  {{ $produk->exp_date }}
+                  </td>
+                  <td>
+                  {{ $produk->status }}
+                  </td>
+                  <td>
+                    <a href="{{ route('produk.show', $produk->id) }}" class="btn btn-sm btn-primary mr-2 mb-2">
+                      Detail
+                    </a>
+                  </td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+            @endif
             {{ $itemproduk->links() }}
           </div>
         </div>

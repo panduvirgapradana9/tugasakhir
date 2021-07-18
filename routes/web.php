@@ -52,6 +52,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('stok/{id}', 'ProdukController@stok')->name('produk.stok');
     //route update stok produk
     Route::post('stok/{id}', 'ProdukController@updatestok')->name('produk.updatestok');
+    //cek stok produk
+    Route::get('cekstok', 'ProdukController@cekstok')->name('produk.cekstok');
+    Route::get('cekkadaluarsa', 'ProdukController@cekkadaluarsa')->name('produk.cekkadaluarsa');
     // route setting profil
     Route::get('setting', 'UserController@setting');
     // form laporan

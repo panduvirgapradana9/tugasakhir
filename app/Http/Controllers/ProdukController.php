@@ -9,6 +9,8 @@ use App\ProdukImage;
 use App\Produk;
 use App\Supplier;
 use App\Kategori;
+use Session;
+use DB;
 
 class ProdukController extends Controller
 {
@@ -26,6 +28,7 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
+        Session::put('produkrole','stok');
 
         $itemproduk = Produk::orderBy('created_at', 'desc')->paginate(20);
 
@@ -257,5 +260,23 @@ class ProdukController extends Controller
         $itemproduk->save();
 
         return redirect()->route('produk.index')->with('success', 'Data berhasil diupdate');
+    }
+    public function cekstok(Request $request) {
+        Session::put('produkrole','stok');
+        $itemproduk = Produk::where('qty','<=', 7)->orderBy('created_at', 'desc')->paginate(20);
+
+        $data = array('title' => 'Stok Produk',
+                    'itemproduk' => $itemproduk);
+        return view('produk.index', $data)->with('no', ($request->input('page', 1) - 1) * 20);
+    }
+    public function cekkadaluarsa(Request $request) {
+        Session::put('produkrole','kadaluarsa');
+        $itemproduk = Produk::
+        whereBetween(DB::raw('DATE(exp_date)'), array('2010-01-01',date("Y-m-d")))
+        ->orderBy('exp_date', 'desc')->paginate(20);
+
+        $data = array('title' => 'Produk Kadaluarsa',
+                    'itemproduk' => $itemproduk);
+        return view('produk.index', $data)->with('no', ($request->input('page', 1) - 1) * 20);
     }
 }

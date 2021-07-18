@@ -149,6 +149,12 @@
             <p>Penjualan</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ URL::to('admin/penyetokan') }}" class="nav-link">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Penyetokan</p>
+          </a>
+        </li>
       </ul>
     </li>
     @endif
