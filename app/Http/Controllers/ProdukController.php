@@ -28,7 +28,7 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
-        Session::put('produkrole','stok');
+        Session::put('produkrole','index');
 
         $itemproduk = Produk::orderBy('created_at', 'desc')->paginate(20);
 
