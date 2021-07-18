@@ -111,6 +111,22 @@
 
 //modal
 @foreach($itemorder as $order)
+<div class="modal fade" id="modal-bukti{{$order->cart->id}}" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Bukti Transfer</h4>
+            </div>
+            <div class="modal-body">
+            <img src="{{ asset('images/buktitransfer/'.$order->cart->bukti_transfer) }}" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        </div>       
+@endforeach
+         
+@foreach($itemorder as $order)
 <div class="modal fade" id="modal-upload{{$order->cart->id}}" role="dialog">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -146,26 +162,7 @@
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-              @endforeach
-@foreach($itemorder as $order)
-<div class="modal fade" id="modal-bukti{{$order->cart->id}}" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Upload Bukti Transfer</h4>
-            </div>
-            <div class="modal-body">
-            <img src="{{ asset('images/buktitransfer/'.$order->cart->bukti_transfer) }}" class="d-block w-100" alt="...">
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-              
-              
-                @endforeach
-         
-        <!-- End Modal -->
-
+@endforeach
   </div>
 </div>
 @endsection
