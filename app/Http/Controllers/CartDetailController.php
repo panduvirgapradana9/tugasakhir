@@ -6,7 +6,7 @@ use App\CartDetail;
 use App\Produk;
 use App\Cart;
 use Illuminate\Http\Request;
-
+use DB;
 class CartDetailController extends Controller
 {
     /**
@@ -50,10 +50,15 @@ class CartDetailController extends Controller
         if ($cart) {
             $itemcart = $cart;
         } else {
-            $no_invoice = Cart::where('user_id', $itemuser->id)->count();
+            $no_invoice = 1;
+            $x = DB::select("select unix_timestamp() as c");
+            foreach ($x as $key) {
+                $no_invoice = $key->c;
+            }
+            
             //nyari jumlah cart berdasarkan user yang sedang login untuk dibuat no invoice
             $inputancart['user_id'] = $itemuser->id;
-            $inputancart['no_invoice'] = 'INV '.str_pad(($no_invoice + 1),'3', '0', STR_PAD_LEFT);
+            $inputancart['no_invoice'] = 'INV '.$no_invoice;
             $inputancart['status_cart'] = 'cart';
             $inputancart['status_pembayaran'] = 'belum';
             $inputancart['status_pengiriman'] = 'belum';

@@ -22,7 +22,7 @@
         <div class="card-header">
           <h4 class="card-title">Keranjang</h4>
           <div class="card-tools">
-            <a href="#" class="btn btn-sm btn-outline-primary">
+            <a href="/" class="btn btn-sm btn-outline-primary">
                 Belanja lagi
             </a>
           </div>
