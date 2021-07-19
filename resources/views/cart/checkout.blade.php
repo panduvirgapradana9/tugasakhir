@@ -133,12 +133,12 @@
                 {{ number_format($itemcart->subtotal, 2) }}
               </td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>Diskon</td>
               <td class="text-right">
                 {{ number_format($itemcart->diskon, 2) }}
               </td>
-            </tr>
+            </tr> -->
             <tr>
               <td>Total</td>
               <td class="text-right">
