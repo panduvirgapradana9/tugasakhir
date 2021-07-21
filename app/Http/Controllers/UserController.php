@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\User;
 use App\Order;
+use DB;
 
 class UserController extends Controller
 {
@@ -54,5 +55,31 @@ class UserController extends Controller
     public function setting() {
         $data = array('title' => 'Setting Profil');
         return view('user.setting', $data);
+    }
+
+    public function editprofil(Request $request) {
+        if ($files = $request->file('fotoprofil')) {
+            request()->validate([
+                'fotoprofil' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           ]);
+       // Define upload path
+           $destinationPath = public_path('/images/profil'); // upload path
+        // Upload Orginal Image           
+           $Image = date('YmdHis') . "." . $files->getClientOriginalExtension();
+           $files->move($destinationPath, $Image);
+           $insert['image'] = "$Image";
+        // Save In Database
+        DB::table('users')->where('id', $request->id)->update([
+            'foto' => $Image,
+            'name' => $request->name,
+            'phone' => $request->phone
+            ]);
+        }else{
+            DB::table('users')->where('id', $request->id)->update([
+            'name' => $request->name,
+            'phone' => $request->phone
+            ]);
+        }
+        return redirect('admin/setting')->with('success', 'Profil diupdate');
     }
 }

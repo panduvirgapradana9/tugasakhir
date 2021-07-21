@@ -8,29 +8,28 @@
           <div class="text-center">
             <img src="{{ asset('img/user1-128x128.jpg') }}" alt="profil" class="profile-user-img img-responsive img-circle">
           </div>
-          <form action="">
+          <form action="editprofil" method="post">
+             @csrf
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <input type="file" name="foto" id="foto">
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Upload</button>
+                  
                 </div>
               </div>
             </div>
-          </form>
           <hr>
-          <form action="">
+          <input type="text" name="id" value="{{ Auth::user()->id }}" class="form-control" hidden="">
+            <div class="form-group">
+              <label for="name">Foto Profil</label>
+              <input type="file" name="fotoprofil" class="form-control">
+            </div>
             <div class="form-group">
               <label for="name">Nama</label>
-              <input type="text" name="name" id="name" class="form-control">
+              <input type="text" name="name" value="{{ Auth::user()->name }}" id="name" class="form-control">
             </div>
             <div class="form-group">
               <label for="phone">No Tlp</label>
-              <input type="text" name="phone" id="phone" class="form-control">
+              <input type="text" value="{{ Auth::user()->phone }}" name="phone" id="phone" class="form-control">
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Update</button>

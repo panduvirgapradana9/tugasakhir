@@ -57,6 +57,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('cekkadaluarsa', 'ProdukController@cekkadaluarsa')->name('produk.cekkadaluarsa');
     // route setting profil
     Route::get('setting', 'UserController@setting');
+    Route::post('editprofil', 'UserController@editprofil')->name('produk.cekkadaluarsa');
+    
     // form laporan
     Route::get('laporan', 'LaporanController@index');
     // proses laporan
