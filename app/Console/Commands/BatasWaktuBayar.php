@@ -39,7 +39,7 @@ class BatasWaktuBayar extends Command
     public function handle()
     {
         \Log::info("status pengiriman transaksi updated");
-        DB::update("Update cart set status_pengiriman='dibatalkan' WHERE status_pembayaran='belum' AND DATEDIFF(CURDATE(), created_at) >= 3");
+        DB::update("Update cart set status_pengiriman='dibatalkan' WHERE status_pembayaran='belum' AND TIMESTAMPDIFF(MINUTE, created_at, now()) >= 1441");
 
         $this->info('status:transaksi Cummand Run successfully!');
     }
