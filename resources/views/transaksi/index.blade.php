@@ -84,7 +84,7 @@
                     @elseif ($order->cart->status_pengiriman=="sudah")
                       Pembayaran Sukses
                     @else
-                      Batas waktu pembayaran {{ date_format($order->cart->created_at->addDays(3),'d-m-Y H:i')}} <br>                      
+                      Batas waktu pembayaran {{ date_format($order->cart->created_at->addDays(1),'d-m-Y H:i')}} <br>                      
                     @endif
                     
                   </td>

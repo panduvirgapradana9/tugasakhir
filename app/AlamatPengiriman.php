@@ -17,6 +17,7 @@ class AlamatPengiriman extends Model
         'kota',
         'kecamatan',
         'kelurahan',
+        'ongkir',
         'kodepos',
     ];
 

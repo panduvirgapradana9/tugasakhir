@@ -24,7 +24,7 @@
                   <th>Nama Penerima</th>
                   <th>Alamat</th>
                   <th>No tlp</th>
-                  <th></th>
+                  <th>Ongkir</th>
                 </tr>
               </thead>
               <tbody>
@@ -42,6 +42,9 @@
                     {{ $pengiriman->no_tlp }}
                   </td>
                   <td>
+                    {{ $pengiriman->ongkir }}
+                  </td>
+                  <td>
                     <form action="{{ route('alamatpengiriman.update',$pengiriman->id) }}" method="post">
                       @method('patch')
                       @csrf()
@@ -54,7 +57,6 @@
                     <form onsubmit="return confirm('Hapus Alamat?')" class="d-inline"
                       action="{{ route('alamatpengiriman.destroy', [$pengiriman->id]) }}" method="POST">
                       @csrf
-                      
                       <input type="hidden" name="_method" value="DELETE">
                       <input type="submit" value="Delete" class="btn btn-danger btn-sm">
                     </form>
@@ -102,29 +104,20 @@
                 </div>
                 <div class="form-group">
                   <label for="no_tlp">No Tlp</label>
-                  <input type="text" name="no_tlp" class="form-control" value={{old('no_tlp') }}>
-                </div>
-                <div class="form-group">
-                  <label for="provinsi">Provinsi</label>
-                  <input type="text" name="provinsi" class="form-control" value={{old('provinsi') }}>
-                </div>
+                  <input type="number" name="no_tlp" class="form-control" value={{old('no_tlp') }}>
+                </div>  
               </div>
+              @php 
+              $desa = DB::select("select * from desa");
+              @endphp
               <div class="col">
                 <div class="form-group">
-                  <label for="kota">Kota</label>
-                  <input type="text" name="kota" class="form-control" value={{old('kota') }}>
-                </div>
-                <div class="form-group">
-                  <label for="kecamatan">Kecamatan</label>
-                  <input type="text" name="kecamatan" class="form-control" value={{old('kecamatan') }}>
-                </div>
-                <div class="form-group">
                   <label for="kelurahan">Kelurahan</label>
-                  <input type="text" name="kelurahan" class="form-control" value={{old('kelurahan') }}>
-                </div>
-                <div class="form-group">
-                  <label for="kodepos">Kodepos</label>
-                  <input type="text" name="kodepos" class="form-control" value={{old('kodepos') }}>
+                  <select class="form-control" name="kelurahan">
+                  @foreach ($desa as $d)
+                        <option value="{{$d->desa}}">{{$d->desa}}</option>
+                  @endforeach
+                  </select>
                 </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary">Simpan</button>

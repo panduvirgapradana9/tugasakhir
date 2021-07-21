@@ -77,6 +77,7 @@
                       <th>Nama Penerima</th>
                       <th>Alamat</th>
                       <th>No tlp</th>
+                      <th>Ongkir</th>                     
                       <th></th>
                     </tr>
                   </thead>
@@ -95,6 +96,8 @@
                         {{ $itemalamatpengiriman->no_tlp }}
                       </td>
                       <td>
+                        {{ $itemalamatpengiriman->ongkir}}
+                      </td>                      <td>
                         <a href="{{ route('alamatpengiriman.index') }}" class="btn btn-success btn-sm">
                           Ubah Alamat
                         </a>                        
@@ -139,6 +142,12 @@
                 {{ number_format($itemcart->diskon, 2) }}
               </td>
             </tr> -->
+            <tr>
+              <td>Ongkir</td>
+              <td class="text-right">
+                {{ number_format($itemcart->ongkir, 2) }}
+              </td>
+            </tr>
             <tr>
               <td>Total</td>
               <td class="text-right">

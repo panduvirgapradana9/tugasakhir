@@ -80,6 +80,7 @@ class TransaksiController extends Controller
                 $inputanorder['kota'] = $itemalamatpengiriman->kota;
                 $inputanorder['kecamatan'] = $itemalamatpengiriman->kecamatan;
                 $inputanorder['kelurahan'] = $itemalamatpengiriman->kelurahan;
+                $inputanorder['ongkir'] = $itemalamatpengiriman->ongkir;
                 $inputanorder['kodepos'] = $itemalamatpengiriman->kodepos;
                 $itemorder = Order::create($inputanorder);//simpan order
                 // update status cart
